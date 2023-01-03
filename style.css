@@ -1,0 +1,182 @@
+:root {
+  --primary-color: #2b1202;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto";
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* flex-direction: column; */
+}
+
+header {
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+}
+
+header button {
+  background-color: transparent;
+  color: gray;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  padding-bottom: 0.7rem;
+  margin-right: 3rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+header button span {
+  /* padding: 1rem; */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  color: #fff;
+  background-color: gray;
+  margin-right: 0.7rem;
+}
+
+header button.active span {
+  background-color: rgb(6, 153, 6);
+}
+
+header button.active {
+  border-bottom: 2px solid rgb(6, 153, 6);
+  color: rgb(6, 153, 6);
+}
+
+form {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 3px 8px var(--primary-color);
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  opacity: 0;
+  animation: animateForm 1.5s ease 0s 1 normal forwards;
+}
+
+form label {
+  color: var(--primary-color);
+  margin: 0.6rem 0;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 47%;
+  flex-shrink: 0;
+}
+
+form input,
+form input:focus-within {
+  color: #2b1202;
+  cursor: pointer;
+}
+
+input {
+  padding: 0.65rem 0.6rem;
+  border-radius: 0.2rem;
+  border: 0.5px solid var(--primary-color);
+  outline: none;
+  transition: outline 0.4s ease;
+  width: 100%;
+}
+
+input:focus {
+  outline: 1px solid var(--primary-color);
+}
+
+form button,
+.nav-btn-cont button {
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  padding: 0.75rem 0.6rem;
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  margin: 0.7rem 0rem;
+}
+
+#submit-b {
+  margin-top: 1.5rem;
+}
+
+#form-b div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  font-size: 0.75rem;
+}
+
+#form-b div span {
+  margin-right: 0.5rem;
+}
+
+.nav-btn-cont {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+.nav-btn-cont button {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media screen and (max-width: 678px) {
+  form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-group {
+    width: 80%;
+    max-width: 400px;
+  }
+}
+
+form:not(#form-a) {
+  display: none;
+}
+
+@keyframes animateForm {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

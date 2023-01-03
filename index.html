@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <button class="active"><span>1</span>Personal Information</button>
+      <button><span>2</span>Identity IQ</button>
+      <button><span>3</span>ID Verification</button>
+    </header>
+    <div class="form-container">
+      <form action="" id="form-a" class="current-form">
+        <div class="form-group">
+          <label for="username">first name</label
+          ><input
+            type="text"
+            name="firstname"
+            id="firstname"
+            placeholder="first name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastname">last name</label
+          ><input
+            type="text"
+            name="lastname"
+            id="lastname"
+            placeholder="last name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="address">address</label
+          ><input
+            type="text"
+            name="address"
+            id="address"
+            placeholder="address"
+          />
+        </div>
+        <div class="form-group">
+          <label for="date-of-birth">date of birth</label
+          ><input type="date" name="date-of-birth" id="date-of-birth" />
+        </div>
+        <div class="form-group">
+          <label for="SSN">social security number</label
+          ><input type="text" name="SSN" id="SSN" placeholder="xxx-xx-xxx" />
+        </div>
+        <div class="form-group">
+          <label for="email">email</label
+          ><input type="email" name="email" id="email" placeholder="email" />
+        </div>
+        <div class="form-group">
+          <label for="phone-number">phone number</label
+          ><input
+            type="text"
+            name="phone-number"
+            id="phone-number"
+            placeholder="phone number"
+          />
+        </div>
+        <button id="submit-a" type="submit" onclick="changeHeaderStyle(1)">
+          submit
+        </button>
+      </form>
+      <form action="" id="form-b">
+        <div class="form-group">
+          <label for="username">user name</label
+          ><input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="user name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">password</label
+          ><input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+          />
+        </div>
+        <button id="submit-b" type="submit" onclick="changeHeaderStyle(2)">
+          submit
+        </button>
+        <div>
+          <span>Don't have an account? </span
+          ><a href="https://www.identityiq.com/" target="_blank">SignUp now</a>
+        </div>
+      </form>
+      <form action="" id="form-c"></form>
+      <div class="nav-btn-cont">
+        <div id="prev-form"><button id="go-prev">Prev</button></div>
+        <div id="next-form"><button id="go-next">Next</button></div>
+      </div>
+    </div>
+  </body>
+</html>
