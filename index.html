@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css"
+    />
     <script src="./app.js" defer></script>
   </head>
   <body>
@@ -95,7 +99,53 @@
           ><a href="https://www.identityiq.com/" target="_blank">SignUp now</a>
         </div>
       </form>
-      <form action="" id="form-c"></form>
+      <form action="" id="form-c">
+        <div class="file-upload-container">
+          <label for="id_card">ID Card</label>
+          <div class="img-area">
+            <input
+              type="file"
+              name="id_card"
+              id="id_card"
+              accept="image/*"
+              hidden
+            />
+            <i class="fi fi-ss-cloud-upload-alt"></i>
+            <h3>Upload Image</h3>
+            <p>Image size must not exceed <span>5MB</span></p>
+            <img src="" alt="" />
+          </div>
+          <button id="id_card">Select Image</button>
+        </div>
+        <div class="file-upload-container">
+          <label for="utility_bill">Utility Bill</label>
+          <div class="img-area">
+            <input
+              type="file"
+              name="utility_bill"
+              id="utility_bill"
+              accept="image/*"
+              hidden
+            />
+            <i class="fi fi-ss-cloud-upload-alt"></i>
+            <h3>Upload Image</h3>
+            <p>Image size must not exceed <span>5MB</span></p>
+            <img src="" alt="" />
+          </div>
+          <button id="utility_bill">Select Image</button>
+        </div>
+        <div class="file-upload-container">
+          <label for="ssd">Social Security Card</label>
+          <div class="img-area">
+            <input type="file" name="ssd" id="ssd" accept="image/*" hidden />
+            <i class="fi fi-ss-cloud-upload-alt"></i>
+            <h3>Upload Image</h3>
+            <p>Image size must not exceed <span>5MB</span></p>
+            <img src="" alt="" />
+          </div>
+          <button id="ssd">Select Image</button>
+        </div>
+      </form>
       <div class="nav-btn-cont">
         <div id="prev-form"><button id="go-prev">Prev</button></div>
         <div id="next-form"><button id="go-next">Next</button></div>
