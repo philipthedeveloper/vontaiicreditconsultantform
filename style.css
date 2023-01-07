@@ -196,8 +196,17 @@ form button,
 }
 
 .file-upload-container {
-  width: 30%;
+  flex-basis: 30%;
   margin-bottom: 1rem;
+}
+@media screen and (max-width: 798px) {
+  #form-c {
+    flex-direction: column;
+  }
+
+  .file-upload-container {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 678px) {
@@ -207,11 +216,16 @@ form button,
   }
 
   .form-group {
-    width: 80%;
-    max-width: 400px;
+    width: 100%;
+    max-width: auto;
   }
 }
 
+@media screen and (max-width: 600px) {
+  header button:not(.active) {
+    display: none;
+  }
+}
 form:not(#form-a) {
   display: none;
 }
