@@ -15,7 +15,6 @@ const submitIdentityIdBtn = document.querySelector("#submit-b");
 const personalInfoInputs = document.forms["form-a"].querySelectorAll("input");
 const identityIdInputs = document.forms["form-b"].querySelectorAll("input");
 const idVerificationInputs = document.forms["form-c"].querySelectorAll("input");
-console.log(idVerificationInputs);
 let cValue = 0;
 
 const personalInfo = {
@@ -38,17 +37,62 @@ const idVerification = {
   ssd: "",
   utility_bill: "",
 };
+const idVerificationIndex = {
+  id_card: 0,
+  utility_bill: 1,
+  ssd: 2,
+};
 
-submitButton.addEventListener("click", function (e) {
+const files = [];
+
+submitButton.addEventListener("click", async function (e) {
   e.preventDefault();
-  for (let key in idVerification) {
-    if (idVerification[key] === "") {
-      alert("Please upload all image");
-      return;
-    }
+  console.log(files);
+  if (files.length < 3) {
+    alert("Please upload all image");
+    return;
   }
-  console.log(idVerification);
+  // for (let key in idVerification) {
+  //   if (idVerification[key] === "") {
+  //     alert("Please upload all image");
+  //     return;
+  //   }
+  // }
+  const data = new FormData();
+  data.append("id_card", files[0]);
+  data.append("utility_bill", files[1]);
+  data.append("ssd", files[2]);
+  for (let key in personalInfo) {
+    data.append(`${key}`, personalInfo[key]);
+  }
+  for (let key in identityID) {
+    data.append(`${key}`, identityID[key]);
+  }
+
+  let options = {
+    method: "POST",
+    mode: "cors",
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
+    // body: JSON.stringify({
+    //   ...personalInfo,
+    //   ...identityID,
+    //   ...idVerification,
+    // }),
+    body: data,
+  };
+  let response = await submit(options);
+  if (response.status === 500) return alert(response.message);
+  alert(response.message);
+  location.reload();
 });
+
+async function submit(options) {
+  let response = await fetch("https://vontaiibackend.onrender.com/", options);
+  let responseText = response.json();
+  return responseText;
+}
 
 submitPersonalInfoBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -145,10 +189,14 @@ fileInputs.forEach((fileInput) => {
     let img = parentImgArea.querySelector("img");
     img.style.display = "block";
     let image = this.files[0];
+    if (!idVerification[e.target.name]) {
+      files.push(this.files[0]);
+    } else {
+      files[idVerificationIndex[e.target.name]] = this.files[0];
+    }
     reader.readAsDataURL(image);
     reader.onload = () => {
       img.src = reader.result;
-      console.log(e.target.name);
       idVerification[e.target.name] = reader.result;
       parentImgArea.append(img);
     };
