@@ -113,6 +113,12 @@ input:focus {
   outline: 1px solid var(--primary-color);
 }
 
+#invalid-email {
+  color: red;
+  margin-top: 0.2rem;
+  font-size: 0.7rem;
+}
+
 form button,
 .nav-btn-cont button {
   border: none;
@@ -219,6 +225,10 @@ form button,
     width: 100%;
     max-width: auto;
   }
+
+  .classic-4::before {
+    font-size: 1.1rem;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -237,5 +247,115 @@ form:not(#form-a) {
 
   100% {
     opacity: 1;
+  }
+}
+
+.loading-spinner {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.loading-spinner.show {
+  display: flex;
+}
+
+.spinner-3 {
+  width: 50px;
+  padding: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #25b09b;
+  --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+  -webkit-mask: var(--_m);
+  mask: var(--_m);
+  -webkit-mask-composite: source-out;
+  mask-composite: subtract;
+  animation: s3 1s infinite linear;
+}
+
+@keyframes s3 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.classic-4 {
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  clip-path: inset(0 3ch 0 0);
+  animation: c4 1s steps(4) infinite;
+}
+
+.classic-4::before {
+  content: "Processing request...";
+  color: #25b09b;
+}
+
+@keyframes c4 {
+  to {
+    clip-path: inset(0 -1ch 0 0);
+  }
+}
+
+.success_container,
+.error_container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.success_container.show {
+  visibility: visible;
+}
+
+.successor,
+.error {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 1rem;
+  text-align: center;
+  width: 50%;
+  aspect-ratio: 1/1;
+}
+
+.successor img,
+.error img {
+  width: 80px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.successor p,
+.error p {
+  font-size: 0.8rem;
+  margin-top: 1rem;
+}
+
+.successor p.congrat,
+.error p.sorry {
+  font-weight: bold;
+}
+
+@media screen and (min-width: 400px) {
+  .successor,
+  .error {
+    width: 200px;
   }
 }

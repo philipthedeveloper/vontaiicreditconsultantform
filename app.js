@@ -1,3 +1,4 @@
+const { useState, useRef } = React;
 const forms = document.forms;
 const formArray = Array.from(forms);
 const buttons = document.querySelectorAll(
@@ -15,16 +16,19 @@ const submitIdentityIdBtn = document.querySelector("#submit-b");
 const personalInfoInputs = document.forms["form-a"].querySelectorAll("input");
 const identityIdInputs = document.forms["form-b"].querySelectorAll("input");
 const idVerificationInputs = document.forms["form-c"].querySelectorAll("input");
+const loadingSpinner = document.querySelector(".loading-spinner");
+const successContainer = document.querySelector(".success_container");
+const errorContainer = document.querySelector(".error_container");
 let cValue = 0;
 
-const personalInfo = {
-  firstname: "",
-  lastname: "",
-  address: "",
-  "date-of-birth": "",
-  SSN: "",
-  email: "",
-  "phone-number": "",
+let personalInfo = {
+  // firstname: "",
+  // lastname: "",
+  // address: "",
+  // "date-of-birth": "",
+  // SSN: "",
+  // email: "",
+  // "phone-number": "",
 };
 
 const identityID = {
@@ -47,7 +51,7 @@ const files = [];
 
 submitButton.addEventListener("click", async function (e) {
   e.preventDefault();
-  console.log(files);
+  // console.log(files);
   if (files.length < 3) {
     alert("Please upload all image");
     return;
@@ -82,30 +86,36 @@ submitButton.addEventListener("click", async function (e) {
     // }),
     body: data,
   };
+  // timeoutError();
   let response = await submit(options);
-  if (response.status === 500) return alert(response.message);
-  alert(response.message);
-  location.reload();
+  if (response.status === 500) {
+    errorContainer.classList.add("show");
+    timeoutError();
+  }
+  successContainer.classList.add("show");
+  timeoutSuccess();
 });
 
 async function submit(options) {
+  handleToggle();
   let response = await fetch("https://vontaiibackend.onrender.com/", options);
   let responseText = response.json();
+  handleToggle();
   return responseText;
 }
 
-submitPersonalInfoBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  for (let key in personalInfo) {
-    if (personalInfo[key] === "") {
-      alert("Please fill all input field");
-      return;
-    }
-  }
-  console.log(personalInfo);
-  changeHeaderStyle(1);
-  newFunction(e.target);
-});
+// function submitPersonalInfo(e) {
+//   e.preventDefault();
+//   for (let key in personalInfo) {
+//     if (personalInfo[key] === "") {
+//       alert("Please fill all input field");
+//       return;
+//     }
+//   }
+//   // console.log(personalInfo);
+//   changeHeaderStyle(1);
+//   newFunction(e.target);
+// }
 
 submitIdentityIdBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -115,7 +125,7 @@ submitIdentityIdBtn.addEventListener("click", function (e) {
       return;
     }
   }
-  console.log(identityID);
+  // console.log(identityID);
   changeHeaderStyle(2);
   newFunction(e.target);
 });
@@ -202,3 +212,37 @@ fileInputs.forEach((fileInput) => {
     };
   });
 });
+
+const handleToggle = () => {
+  if (loadingSpinner.classList.contains("show")) {
+    loadingSpinner.classList.remove("show");
+    const scrollY = document.body.style.top;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    window.scrollTo(0, parseInt(scrollY || "0") * -1);
+  } else {
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${window.scrollY}px`;
+    loadingSpinner.classList.add("show");
+  }
+};
+
+function timeoutSuccess() {
+  setTimeout(() => {
+    successContainer.classList.remove("toggle");
+    location.reload();
+  }, 3000);
+}
+
+// function timeoutError() {
+//   setTimeout(() => {
+//     handleToggle();
+//     errorContainer.style.visibility = "visible";
+//     timeoutCounter();
+//   }, 30000);
+// }
+function timeoutError() {
+  setTimeout(() => {
+    errorContainer.style.visibility = "hidden";
+  }, 2000);
+}
